@@ -1,6 +1,6 @@
 <?php
 
-if (! extension_loaded('mysql')) {
+if (!extension_loaded('mysql')) {
     // Predifined fetch constants
     define('MYSQL_BOTH', MYSQLI_BOTH);
     define('MYSQL_NUM', MYSQLI_NUM);

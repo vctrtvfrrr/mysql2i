@@ -45,7 +45,7 @@ class MySQL2i
             $link = self::$currObj;
         }
 
-        $query = "CREATE DATABASE `" . $database_name . "`";
+        $query = 'CREATE DATABASE `'.$database_name.'`';
         mysqli_query($link, $query);
 
         $e = mysqli_errno($link);
@@ -88,7 +88,7 @@ class MySQL2i
             $link = self::$currObj;
         }
 
-        $query = "DROP DATABASE `" . $database . "`";
+        $query = 'DROP DATABASE `'.$database.'`';
         mysqli_query($link, $query);
 
         $e = mysqli_errno($link);
@@ -139,7 +139,7 @@ class MySQL2i
 
     public static function mysql_fetch_field($result, $field_offset = 0)
     {
-        if (! empty($field_offset)) {
+        if (!empty($field_offset)) {
             for ($x = 0; $x < $field_offset; $x++) {
                 mysqli_fetch_field($result);
             }
@@ -172,12 +172,12 @@ class MySQL2i
 
         $flags_num = mysqli_fetch_field_direct($result, $field_offset)->flags;
 
-        if (! isset($flags)) {
+        if (!isset($flags)) {
             $flags = [];
             $constants = get_defined_constants(true);
             foreach ($constants['mysqli'] as $c => $n) {
                 if (preg_match('/MYSQLI_(.*)_FLAG$/', $c, $m)) {
-                    if (! array_key_exists($n, $flags)) {
+                    if (!array_key_exists($n, $flags)) {
                         $flags[$n] = $m[1];
                     }
                 }
@@ -233,7 +233,7 @@ class MySQL2i
 
         $type_id = mysqli_fetch_field_direct($result, $field_offset)->type;
 
-        if (! isset($types)) {
+        if (!isset($types)) {
             $types = [];
             $constants = get_defined_constants(true);
             foreach ($constants['mysqli'] as $c => $n) {
@@ -243,7 +243,7 @@ class MySQL2i
             }
         }
 
-        return array_key_exists($type_id, $types)? $types[$type_id] : null;
+        return array_key_exists($type_id, $types) ? $types[$type_id] : null;
     }
 
     public static function mysql_free_result($result)
@@ -309,7 +309,7 @@ class MySQL2i
             $link = self::$currObj;
         }
 
-        $query = "SHOW DATABASES";
+        $query = 'SHOW DATABASES';
         $r = mysqli_query($link, $query);
         $e = mysqli_errno($link);
 
@@ -326,7 +326,7 @@ class MySQL2i
             $link = self::$currObj;
         }
 
-        $query = "SHOW COLUMNS FROM `" . $table_name . "`";
+        $query = 'SHOW COLUMNS FROM `'.$table_name.'`';
         $r = mysqli_query($link, $query);
         $e = mysqli_errno($link);
 
@@ -352,7 +352,7 @@ class MySQL2i
             $link = self::$currObj;
         }
 
-        $query = "SHOW TABLES FROM `" . $database . "`";
+        $query = 'SHOW TABLES FROM `'.$database.'`';
         $r = mysqli_query($link, $query);
         $e = mysqli_errno($link);
 
@@ -377,10 +377,10 @@ class MySQL2i
 
     public static function mysql_pconnect($host = '', $username = '', $passwd = '', $new_link = false, $client_flags = 0)
     {
-        $link = mysqli_connect('p:' . $host, $username, $passwd);
+        $link = mysqli_connect('p:'.$host, $username, $passwd);
 
-        if (! $link) {
-            echo mysqli_error($link) . '<br>';
+        if (!$link) {
+            echo mysqli_error($link).'<br>';
         }
 
         self::$currObj = $link;
@@ -423,7 +423,7 @@ class MySQL2i
         //ver 1.5 code credited to Mario Lurig at https://mariolurig.com/coding/mysqli_result-function-to-match-mysql_result/
         $numrows = mysqli_num_rows($result);
 
-        if ($numrows && $row <= ($numrows-1) && $row >=0) {
+        if ($numrows && $row <= ($numrows - 1) && $row >= 0) {
             mysqli_data_seek($result, $row);
             $resrow = (is_numeric($field)) ? mysqli_fetch_row($result) : mysqli_fetch_assoc($result);
             if (isset($resrow[$field])) {
